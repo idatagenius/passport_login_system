@@ -54,11 +54,36 @@ app.post('/login',
     // `req.user` contains the authenticated user.
     res.redirect('/');
   });
+// app.post('/login', checkNotAuthenticated, passport.authenticate('local', {
+//     successRedirect: '/',
+//     failureRedirect: '/login',
+//     failureFlash: true
+// }))
+// app.post('/login', (req, res) => {
+//     bcrypt.compare(req.body.password, )
+// })
 
 // Register Page
 app.get('/register', checkNotAuthenticated, (req, res) => {
     res.render('register.ejs')
 })
+
+// app.post('/register', checkNotAuthenticated, async (req, res) => {
+//     try {
+//         const hashedPassword = bcrypt.hash(req.body.password, 10, function(err, hash) {
+//             // Store hash in your password DB.
+//             User.create({
+//                 name: req.body.name,
+//                 email: req.body.email,
+//                 password: hashedPassword
+//             })
+//             res.redirect('/login')
+//         })
+//     } catch {
+//         res.redirect('/register')
+//     }
+//     console.log(users)
+// })
 
 app.post('/register', (req, res) => {
     bcrypt.genSalt(10, function(err, salt) {
